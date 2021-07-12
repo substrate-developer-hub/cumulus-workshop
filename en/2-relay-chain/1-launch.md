@@ -23,7 +23,7 @@ However we've chosen to leave them in to enforce the habit of checking their val
 is using the defaults, no other nodes on the relay chain or parachains can use these ports.
 
 When the node starts you will see several log messages. **Take note of the node's Peer ID**
-in the logs. We will need it when connecting other nodes to her. It will look something like
+in the logs. We will need it when connecting other nodes to it. It will look something like
 this:
 
 ```bash
