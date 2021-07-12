@@ -18,8 +18,8 @@ FROM debian:stretch-slim
 COPY --from=builder /builds/substrate-parachain-template/target/release/parachain-collator .
 
 ## Copy chainspecs into the image
-COPY shared/chainspecs/rococo-custom.json .
-COPY shared/chainspecs/rococo-3.json .
+COPY shared/chainspecs/rococo-local-2-raw.json .
+COPY shared/chainspecs/rococo-local-3-raw.json .
 
 # Open default ports. User is responsible for re-mapping these
 # or using host or overlay networking.

@@ -1,8 +1,9 @@
 # Starting the Relay Chain
 
 Before we can attach any cumulus-based parachains, we need to launch a relay chain to connect to.
-This page describes in detail how to start both nodes in the two-validator `rococo-custom.json`
-spec that ships with this workshop as well as general instructions for starting additional nodes.
+This page describes in detail how to start both nodes using the two-validator `rococo-local-2-raw.json`
+chain spec that ships with this workshop as well as the general instructions for starting additional
+nodes.
 
 ## Start Alice's Node
 
@@ -18,30 +19,16 @@ polkadot \
 ```
 
 The port and websocket port specified here are the defaults and thus those flags can be omitted.
-However We've chosen to leave them in to enforce the habit of checking their values. Because Alice
+However we've chosen to leave them in to enforce the habit of checking their values. Because Alice
 is using the defaults, no other nodes on the relay chain or parachains can use these ports.
 
-> When the node starts you will see several log messages. **Take note of her node's Peer ID**
-> in the logs. We will need it when connecting other nodes to her. It will look something _like_
-> this:
->
-> ```bash
-> 🏷 Local node identity is: 12D3KooWGjsmVmZCM1jPtVNp6hRbbkGBK3LADYNniJAKJ19NUYiq
-> ```
+When the node starts you will see several log messages. **Take note of the node's Peer ID**
+in the logs. We will need it when connecting other nodes to it. It will look something like
+this:
 
-### Connect Apps UI
-
-To explore and interact with the network, you can use the Polkadot JS Apps UI. If you've started
-this node using the command above, you can access the node as
-https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944
-
-> Some browsers, notably Firefox, will not connect to a local node from an https website. An easy
-> work around is to try another browser, like Chromium.
->
-> At time of writing, this demo works with the hosted version of Apps linked above. If something has
-> changed in the meantime, try to
-> [host the interface locally](https://github.com/polkadot-js/apps#development) using the commit
-> that is defined [the version compatibility](/#versions-of-software) noted.
+```bash
+🏷 Local node identity is: 12D3KooWGjsmVmZCM1jPtVNp6hRbbkGBK3LADYNniJAKJ19NUYiq
+```
 
 ## Start Bob's Node
 
@@ -64,11 +51,11 @@ network, so I've chosen to leave it in.
 
 ## Starting Additional Nodes (Optional)
 
-> If you are using the `rococo-custom.json` spec, you do not need to start additional nodes.
+> If you are using the `rococo-local-2-raw.json` spec, you do not need to start additional nodes.
 
-If you're using the `rococo-custom-3.json` or `rococo-custom-4.json` specs that ship with this workshop you will
+If you're using the `rococo-local-3-raw.json` or `rococo-local-4-raw.json` specs that ship with this workshop you will
 need to start one or two more nodes. Again, this command is entirely analogous. You just need to
-make sure that nodes on the same physical system do not have conflicting ports or base directories.
+make sure that nodes on the same physical system do not have conflicting ports or base paths.
 
 ```bash
 polkadot \
@@ -80,6 +67,6 @@ polkadot \
 --ws-port 9966
 ```
 
-If your custom chainspec includes self-generated keys, see the
+If your custom chain spec includes self-generated keys, see the
 [Substrate private network tutorial](https://substrate.dev/docs/en/tutorials/start-a-private-network/customchain#add-keys-to-keystore)
 for details on inserting these keys.

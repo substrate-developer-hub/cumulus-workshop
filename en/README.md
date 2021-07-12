@@ -1,48 +1,40 @@
 # Substrate Cumulus Workshop
 
-Connect Substrate blockchains to Polkadot with Cumulus
-
-In this hands-on workshop, participants will start a Polkadot-like relay chain, register
+In this hands-on workshop, participants will start a Polkadot-like chain (the relay chain), register
 parachains, make cross-chain asset transfers, and convert their own Substrate runtimes to parachains
 using Cumulus.
 
-## Prerequisites
+## Substrate Experience
 
-Before you start you need to do a **substrate comprehension check** and ensure your hardware can
-build and run this (rather resource intensive) set of software.
-
-### Substrate Requirements
-
-If you are here _without_ any former substrate experience, you are likely to not understand or
+If you are here _without_ any former Substrate experience, you are likely to not understand or
 complete this tutorial. Before you continue please complete the following tutorials:
 
 - [Create Your First Substrate Chain](https://substrate.dev/docs/en/tutorials/create-your-first-substrate-chain/)
 - [Start a Private Network](https://substrate.dev/docs/en/tutorials/start-a-private-network/)
 
-We will reference these assuming you have already understand all the steps involved in these, and
-have your machine configured for substrate based code base compilation.
+We will reference these assuming you have already understand all the steps involved, and
+have your machine configured to compile Substrate-based projects.
 
-### Hardware Requirements
+## Hardware Requirements
 
-Any machine may* handle building a parachain template, but it is a \_very* resource intensive
-process! We suggest running these builds on a machine with **no less than**:
+In this workshop, we will be using [Substrate Parachain Template](https://github.com/substrate-developer-hub/substrate-parachain-template). Compiling this project is a resource intensive
+process! We suggest compiling and running Parachain template on a machine with **no less than**:
 
-- 16 GB of RAM (32 is suggested)
+- 8 GB of RAM (16 is suggested)
 - 4 CPU cores (8 is suggested)
 - 50 GB of free HDD/SSD space
 
-Without the minimal RAM here, you are likely to **run out of memory resulting in a `SIGKILL`
-error!** This generally happens on the `polkadot-service` build - so be sure to _monitor your RAM
-usage_ (with something like [htop](https://htop.dev/)) and lookout for swap starting to be used.
+Without the minimal RAM here, you are likely to *run out of memory resulting in a `SIGKILL`
+error*. This generally happens on the `polkadot-service` build - so be sure to _monitor your RAM
+usage_ (with something like [`htop`](https://htop.dev/)) and look out as swap memory starting to be
+used.
 
-If you cannot use a machine with the minimums here,you can try a few things that trade longer build
-times for limited RAM usage.
+If you cannot find a machine with the minimums here, try the following that trade longer build
+time for more limited memory usage.
 
-- Use Less threads cargo's `j` flag == the number of threads to use to build. Try to use just a
-  few less than you have available total and monitor RAM usage.
-- Cargo's
-  [codegen units](<](https://doc.rust-lang.org/cargo/reference/profiles.html#codegen-units)>)
-  feature makes more optimized builds, and uses less ram, but _much_ longer compile times!
+- Use less threads: cargo's `-j` flag specifies the number of threads to use to build. Try to use one less than the CPU cores your machine has.
+- Cargo's [codegen units](https://doc.rust-lang.org/cargo/reference/profiles.html#codegen-units)
+feature makes more optimized builds, with less ram, but _much_ longer compile times.
 
 ```bash
 # use less codegen units
@@ -51,40 +43,29 @@ RUSTFLAGS="-C codegen-units=1" cargo build --release
 cargo build --release -j 1
 ```
 
-Try one, or both of these methods together, to trade time for limited RAM machines.
-
-> Eventually `polkadot-service` will be less monolithic, but this is presently a low priority. It
-> builds a node for _every network_ in the polkadot repo.
-
-## Versions of Software
+## Software Version
 
 At the moment, parachains are _very tightly coupled_ with the relay chain's codebase they are
 connecting to. If you want to connect your parachian to a running relay network like the
-[rococo](https://wiki.polkadot.network/docs/en/build-parachains-rococo) test network, you _must_ be
+[Rococo](https://wiki.polkadot.network/docs/en/build-parachains-rococo) test network, you _must_ be
 sure that you are testing against the exact same build of that relay chain.
 
 This workshop has been tested on commits:
 
-- **Polkadot @
-  [`5d466006`](https://github.com/paritytech/polkadot/commit/5d46600684ff009fa691d399e0c865de4a1e0a81)**
-- **Parachain Template @
-  [`4c47b6e2`](https://github.com/substrate-developer-hub/substrate-parachain-template/commit/4c47b6e2b88bf23807be3325e0d798a8540a2e84)**
-- **Polkadot JS Apps @
-  [`23adf03b`](https://github.com/polkadot-js/apps/commit/23adf03b85ba2b9ae1090b9862ed04796e644cf4)**
-  - _It is generally expected that the
-    [hosted Polkadot JS Apps](https://polkadot.js.org/apps/#/explorer) \_should_ work. If you
-    have issues, build and host this UI yourself, at this commit.
+- **Polkadot** tagged [**`v0.9.7`**](https://github.com/paritytech/polkadot/tree/v0.9.7)
+- **Parachain Template** tagged [**`polkadot-v0.9.7`**](https://github.com/substrate-developer-hub/substrate-parachain-template/tree/polkadot-v0.9.7)
+- **Polkadot-JS Apps** tagged [**`v0.93.1`**](https://github.com/polkadot-js/apps/tree/v0.93.1).
+  It is generally expected that the [hosted Polkadot-JS Apps](https://polkadot.js.org/apps/#/explorer) should work. If you have issues, build and run this UI yourself, at this tagged version.
 
-> NOTE: you **must** use these commits exactly to ensure that you do not run into conflicts as
-> parachain development development is actively making breaking changes between commits on these
+> NOTE: you **must** use these version exactly to ensure that you do not run into conflicts as
+> parachain development is actively making breaking changes between commits on these
 > repositories!
 
 #### Polkadot Testnet Compatibility
 
-We on the devhub team do our best to keep the parachain template & this workshop updated presently
-with the latest release of Polkadot. **But do not assume this is the case!** Check with us in the
-[Rococo matrix channel](https://matrix.to/#/#rococo:matrix.parity.io) when breaking changes and
-testnet resets occur.
+We are doing our best to keep the parachain template & this workshop updated presently
+with the latest release of Polkadot. Please check with us in the [Parachain Technical matrix channel](https://matrix.to/#/#parachain-technical:matrix.parity.io)
+when breaking changes and testnet resets occur.
 
 ## Learn More
 

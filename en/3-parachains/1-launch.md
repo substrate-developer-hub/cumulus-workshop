@@ -1,11 +1,11 @@
 # Launching a Parachain
 
-We'll begin by deploying a parachain template with parachain id `200`. These instructions are written
-specifically for parachain id 200, however you can re-use these instructions with any parachain id
-by adjusting occurrences of the number 200 accordingly.
+We'll begin by deploying [Parachain Template](https://github.com/substrate-developer-hub/substrate-parachain-template)
+with Para ID `2000`. These instructions are written specifically for Para ID 2000.
 
-Note that the `parachain-collator` command used below comes from the [substrate-parachain-template repo](https://github.com/substrate-developer-hub/substrate-parachain-template/)
-that we set up in the [Preparation/Compiling step](/#versions-of-software) at a _specific_ commit.
+The `parachain-collator` binary used below comes from compiling the Parachain Template successfully.
+Refer to [Building the Parachain Template](en/1-prep/1-compiling?id=building-the-parachain-template)
+section for details.
 
 ## Generate Parachain Genesis State
 
@@ -26,22 +26,20 @@ parachain blocks. The collator node also has a command to produce this Wasm blob
 parachain-collator export-genesis-wasm > para-2000-wasm
 ```
 
-> The Wasm blob does not depend on the parachain id, so we do not provide that flag. If you are
+> The Wasm blob does not depend on the Para ID, so we do not provide that flag. If you are
 > launching multiple parachains using the exact same runtime, you do not need to regenerate the Wasm
-> blob each time (although it is fast and harmless to do so).
+> blob each time.
 
-> This is for the _genesis_ only - you cannot, at this time, connect a parachian with any previous
-> state to a relay chain. All parachains _must_ start from block 0 on the relay chain.
-> There is _no_ "hot swap" consensus or re-genesis possible at the moment either.
+> This is for the *genesis* block only. You cannot, at this time, connect a parachian with any
+> previous state to a relay chain. All parachains must start from block 0 on the relay chain.
 
 ## Start the Collator Node
 
 We can now start the collator node with the following command. Notice that we need to supply the same
-relay chain spec we used when launching relay chain nodes.
+relay chain spec we used when launching relay chain nodes, at the second half of the command.
 
 ```bash
-# NOTE: this command assumes a ParaId of 2000. Change as needed.
-# Above `--` line are flags for the parachain collator, below for the embedded relay chain validator
+# NOTE: this command assumes a Para ID of 2000. Change as needed.
 parachain-collator \
 --alice \
 --collator \
@@ -58,21 +56,20 @@ parachain-collator \
 ```
 
 The first thing to notice about this command is that several arguments are passed before the lone
-`--`, and several more arguments are passed after it. A cumulus collator contains the actual
-collator node, and also an **embedded relay chain node**. The arguments before the `--` are for the
+`--`, and several more arguments passed after it. A cumulus collator contains the actual
+collator node and also an **embedded relay chain node**. The arguments before the `--` are for the
 collator, and the arguments after the `--` are for the embedded relay chain node.
 
 We give the collator a base path and ports as we did for the relay chain node previously. We also
-specify the parachain id.
+specify the Para ID.
 
-> Remember to change the collator-specific values if you are executing
-> these instructions a second time for a second parachain.
-> You will use the same relay chain chain spec, but need different ports exposed.
+Remember to change the collator-specific values if you are executing these instructions a second
+time for a second parachain. You will use the same relay chain chain spec, but need different ports
+exposed.
 
-> A Parachain node = (full) collator + (full) validator node.
-> _Eventually_, this will change to only need a minimal light client for the relay chain node.
-> There is also no such thing as a "light" collator node that does not include an embedded
-> relay chain node _yet_ - but there will also eventually be options for this.
+Currently, a parachain node runs both a parachain collator (or full node) tightly coupled with a relay chain full node in the same process.
+There is presently no way to run a parachain node without the embedded relay chain node, but it is expected
+that this will become possible for non-collator nodes eventually.
 
 ## Is It Working?
 
@@ -122,5 +119,5 @@ At this point your _collator's logs_ should look something like this:
 ```
 
 You should see your collator node running (alone) and peering with the already
-running relay chain nodes. You should **_not_** see it authoring parachain blocks yet!
+running relay chain nodes. It has not start authoring parachain blocks yet.
 Authoring will begin when the collator is actually **registered on the relay chain**.

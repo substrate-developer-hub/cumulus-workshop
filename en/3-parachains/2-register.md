@@ -3,35 +3,43 @@
 We have our relay chain launched and our parachain collator ready to go. Now we have to register the
 parachain on the relay chain. In the live Polkadot network, this will be accomplished with
 [parachain auctions](https://wiki.polkadot.network/docs/en/learn-auction). But today we will do it
-with Sudo.
+with `Sudo` call.
 
 ## Registration Transaction
 
-The transaction can be submitted **on a relay chain node** from
-`Developer > Sudo > parasSudoWrapper > sudoScheduleParaInitialize` with the following parameters:
+The transaction can be submitted **on a relay chain node** via Polkadot Apps UI.
 
-- id: `2000`
-- genesisHead: upload the file `para-2000-genesis` (from the previous step)
-- validationCode: upload the file `para-2000-wasm` (from the previous step)
-- parachain: Yes
+- Goto [Polkadot Apps UI](https://polkadot.js.org/apps/#/explorer), connecting to your relay chain.
+
+- Execute a sudo extrinsic on the relay chain by going to `Developer` -> `sudo` page.
+
+- Pick `paraSudoWrapper` -> `sudoScheduleParaInitialize(id, genesis)` as the extrinsic type,
+shown below.
 
 ![Registration screenshot](../../assets/img/parachain-registration-sudo.png)
 
-This successful dispatch will emit the `sudo.Sudid` event, viewable in the relay chain explorer page.
+- In the extrinsics parameters, specify:
+
+  - Set the `id: ParaId` to 2,000
+  - `genesisHead`: upload the file `para-2000-genesis` (from the previous step)
+  - `validationCode`: upload the file `para-2000-wasm` (from the previous step)
+  - Set the `parachain: Bool` option to **Yes**.
+
+This dispatch, if successful, will emit the `sudo.Sudid` event, viewable in the relay chain explorer
+page.
 
 If you are running a network with more than two validators you can add more parachains through the
-same interface with the parameters adjusted accordingly. More important details on this in the
+same interface with the parameters adjusted accordingly. More details on this can be found
 [latter on in this tutorial](en/3-parachains/4-more-nodes).
 
-### Block Production
+## Block Production
 
 The collator should start producing parachain blocks (aka collating) once the registration is
-successful **and a new relay chain epoch has begun**!!
+successful **and a new relay chain epoch has begun**!
 
-> This may take a while! be patient as you need to wait for a new epoch to begin first.
-> This is 10 blocks for the
-> [included rococo `chain-spec.json`](en/1-prep/2-chain-spec?id=_1a-using-a-prebuilt-chain-spec)
-> in this workshop's files.
+> This may take a while! Be patient as you wait for a new epoch to begin first.
+> This is 10 blocks for the [rococo `chain-spec.json`](en/1-prep/2-chain-spec?id=_1a-using-a-prebuilt-chain-spec)
+> included in this workshop.
 
 Finally, the collator should start producing log messages like the following:
 
@@ -83,28 +91,28 @@ Finally, the collator should start producing log messages like the following:
 2021-05-30 17:00:39 [Parachain] 💤 Idle (0 peers), best: #2 (0x5087…b5a0), finalized #1 (0x80fc…ccae), ⬇ 0 ⬆ 0
 ```
 
-#### Collator Data Base Corruption or Loss
+## Chains Purge
 
-> NOTE: your sole collator is the _only home of all parachain data_ as there is only one node
-> on your entire network! Relay chains only store _header_ information! If the parachian DB is lost
-> (my using `--tmp` for you collator as an example) you will **NOT** be able to recover the chain!
+> **NOTE**: your sole collator is the _only home of the parachain data_ as there is only one node
+> on your entire network. Relay chains only store _header_ information. If the parachian data is lost
+>  you will **not** be able to recover the chain!
 
-If you _must_ purge your chain, you need to deregister and re-register! It may be easier in testing
-to instead purge all the chains. To purge the collator DB run:
+If you _must_ purge your chain database, you need to deregister and re-register it. It may be easier
+in testing to instead just purge all the chains. To purge the collator, run:
 
 ```bash
 # Purge the collator(s)
 parachain-collator purge-chain\
-  --base-path <your collator DB path set above> \  # <-- set a proper path
+  --base-path <your collator DB path set above>
 
 # Purge the validator(s)
 polkadot purge-chain\
-  --base-path <your collator DB path set above> \  # <-- set a proper path
+  --base-path <your relay chain DB path set above>
 ```
 
 Then register from a [blank slate](#registration-transaction) again.
 
-### Parachian Block Finalization
+## Parachian Block Finalization
 
 The relay chain tracks the latest blocks (the heads) of each parachain. When a relay chain block
 is finalized, any parachain blocks that have completed the
