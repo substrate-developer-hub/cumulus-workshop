@@ -9,7 +9,7 @@ for your relay chain network. You can use one that is included with this worksho
 
 Whichever chain spec file you choose to use we will refer to the file simply as `chain-spec.json`
 in the instructions below. You will need to supply the proper path to the chain spec you are using.
-These *conventionally* live in a `/res` folder that is published in your node's codebase for others to use. As an example:
+These _conventionally_ live in a `/res` folder that is published in your node's codebase for others to use. As an example:
 
 - Polkadot includes these **relay chain** chain spec files [here](https://github.com/paritytech/polkadot/tree/master/node/service/res)
 - Cumulus includes these **parachain** chain spec files [here](https://github.com/paritytech/cumulus/tree/master/polkadot-parachains/res)
@@ -33,16 +33,16 @@ local test network:
 
 <!-- for some reason these links can't be markdown. See https://github.com/substrate-developer-hub/cumulus-workshop/issues/16 -->
 
-- <a href="shared/chainspecs/rococo-local-2-raw.json">shared/chainspecs/rococo-local-2-raw.json</a>:
-A two-validator relay chain with Alice and Bob as authorities. Useful for registering a single parachain. Plain chain spec <a href="shared/chainspecs/rococo-local-2-plain.json">included</a>.
+- <a href="shared/chainspecs/rococo-custom-2-raw.json">shared/chainspecs/rococo-custom-2-raw.json</a>:
+  A two-validator relay chain with Alice and Bob as authorities. Useful for registering a single parachain. Plain chain spec <a href="shared/chainspecs/rococo-custom-2-plain.json">included</a>.
 
-- <a href="shared/chainspecs/rococo-local-3-raw.json">shared/chainspecs/rococo-local-3-raw.json</a>:
+- <a href="shared/chainspecs/rococo-custom-3-raw.json">shared/chainspecs/rococo-custom-3-raw.json</a>:
   A three-validator relay chain identical to `rococo-local` spec, with Charlie as the third
-  validator. Plain chain spec <a href="shared/chainspecs/rococo-local-3-plain.json">included</a>.
+  validator. Plain chain spec <a href="shared/chainspecs/rococo-custom-3-plain.json">included</a>.
 
-- <a href="shared/chainspecs/rococo-local-4-raw.json">shared/chainspecs/rococo-local-4-raw.json</a>:
-A four-validator relay chain identical to `rococo-local` spec, with Charlie and Dave as the
-third and fourth validators. Plain chain spec <a href="shared/chainspecs/rococo-local-4-plain.json">included</a>.
+- <a href="shared/chainspecs/rococo-custom-4-raw.json">shared/chainspecs/rococo-custom-4-raw.json</a>:
+  A four-validator relay chain identical to `rococo-local` spec, with Charlie and Dave as the
+  third and fourth validators. Plain chain spec <a href="shared/chainspecs/rococo-custom-4-plain.json">included</a>.
 
 Plain chain spec files are in a more human readable and modifiable format for your inspection. They
 can also be used to derive a [new custom raw chain spec](#adjust-the-chain-spec).

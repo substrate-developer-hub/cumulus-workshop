@@ -1,7 +1,7 @@
 # Starting the Relay Chain
 
 Before we can attach any cumulus-based parachains, we need to launch a relay chain to connect to.
-This page describes in detail how to start both nodes using the two-validator `rococo-local-2-raw.json`
+This page describes in detail how to start both nodes using the two-validator `rococo-custom-2-raw.json`
 chain spec that ships with this workshop as well as the general instructions for starting additional
 nodes.
 
@@ -51,9 +51,9 @@ network, so I've chosen to leave it in.
 
 ## Starting Additional Nodes (Optional)
 
-> If you are using the `rococo-local-2-raw.json` spec, you do not need to start additional nodes.
+> If you are using the `rococo-custom-2-raw.json` spec, you do not need to start additional nodes.
 
-If you're using the `rococo-local-3-raw.json` or `rococo-local-4-raw.json` specs that ship with this workshop you will
+If you're using the `rococo-custom-3-raw.json` or `rococo-custom-4-raw.json` specs that ship with this workshop you will
 need to start one or two more nodes. Again, this command is entirely analogous. You just need to
 make sure that nodes on the same physical system do not have conflicting ports or base paths.
 
