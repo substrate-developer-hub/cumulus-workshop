@@ -7,16 +7,31 @@ with `Sudo` call.
 
 ## Registration Transaction
 
-The transaction can be submitted **on a relay chain node** via Polkadot Apps UI.
+The transaction can be submitted **on a relay chain node** via Polkadot Apps UI. There are options
+for you to accomplish different types of registration that we cover below, only _one_ is needed.
+Note that all methods here depend on a [`paraID` being reserved](en/2-relay-chain/reserve) - so be
+sure to do that first.
 
-- Goto [Polkadot Apps UI](https://polkadot.js.org/apps/#/explorer), connecting to your relay chain.
+If you are running a network with more than two validators you can add more parachains through the
+same interface with the parameters adjusted accordingly using any mix of these options. More details
+on this can be found [latter on in this tutorial](en/3-parachains/4-more-nodes).
+
+### Option 1: `paraSudoWrapper.sudoScheduleParaInitialize`
+
+> This option bypasses the slot lease mechanics entirely to onboard a parachain or parathread for a
+> reserved `paraID` starting on the next relay chain session. This is the simplest and fastest way to
+> go about testing, but note that it also will be automatically off-boarded at the next slot, where any
+> parachains without a lease are downgraded to parathreads, so make note of the next slot
+> ending period and be sure to re-register as needed.
+
+- Go to [Polkadot Apps UI](https://polkadot.js.org/apps/#/explorer), connecting to your **relay chain**.
 
 - Execute a sudo extrinsic on the relay chain by going to `Developer` -> `sudo` page.
 
 - Pick `paraSudoWrapper` -> `sudoScheduleParaInitialize(id, genesis)` as the extrinsic type,
   shown below.
 
-![Registration screenshot](../../assets/img/parachain-registration-sudo.png)
+![Registration Screenshot](../../assets/img/parachain-registration-sudo.png)
 
 - In the extrinsics parameters, specify:
 
@@ -28,9 +43,36 @@ The transaction can be submitted **on a relay chain node** via Polkadot Apps UI.
 This dispatch, if successful, will emit the `sudo.Sudid` event, viewable in the relay chain explorer
 page.
 
-If you are running a network with more than two validators you can add more parachains through the
-same interface with the parameters adjusted accordingly. More details on this can be found
-[latter on in this tutorial](en/3-parachains/4-more-nodes).
+### Option 2: Register Parathread -> `slots.forceLease`
+
+> This is the more formal flow for registration used in production (with the exception of the use of
+> sudo to force a slot lease): you register your reserved `paraID` with the _same_ account that
+> reserved it, or use `sudo` with a `registrar.forceRegister` extrinsic if you wish.
+
+Please first follow the [Rococo registration](en/5-rococo-registration/1-register?id=_2-register-as-a-parathread)
+instructions, with the exception of asking for a slot lease to be awarded or participating in a slot auction on a
+public testnet or mainnet. Here we will use `sudo` to grant ourselves a lease instead. You should
+have an onboarded parathread:
+
+![parathread-onboarding.png](../../assets/img/parathread-onboarding.png)
+
+- Go to [Polkadot Apps UI](https://polkadot.js.org/apps/#/explorer),
+  connecting to your **relay chain**.
+
+- Execute a sudo extrinsic on the relay chain by going to `Developer` -> `sudo` page.
+
+- Pick `slots`->`forceLease(para, leaser, amount, period_begin, period_end)` as the extrinsic type,
+  shown below.
+
+![`forceLease` Screenshot](../../assets/img/forceLease.png)
+
+Be sure to set the begin period to the slot you wish to start at, in testing this very likely is the
+already active slot `0` if you started from scratch. Extending this out to beyond the scope of
+the time you wish to test this parachain is likely best, unless you wish to test onboarding and
+offboarding cycles, then electing slot leases that have gaps for a `paraID` would be in order.
+Once fully onboarded and after [block production](#block-production) starts you should see:
+
+![Slot Lease Active Screenshot](../../assets/img/parachain-active-lease.png)
 
 ## Block Production
 

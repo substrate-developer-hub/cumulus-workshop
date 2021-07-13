@@ -49,7 +49,7 @@ The procedure will be as followed:
 
 - Reserve for the next available Para ID.
 
-  ![register-parathread.png](../../assets/img/paraid-reserve.png)
+  ![paraid-reserve.png](../../assets/img/paraid-reserve.png)
 
 - After successfully reserving your Para ID, you can now register as a **Parathread**.
 
