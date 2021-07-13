@@ -14,7 +14,7 @@ polkadot \
 --validator \
 --base-path /tmp/relay/alice \
 --chain <path to spec json> \
---port 50555 \
+--port 30333 \
 --ws-port 9944
 ```
 
@@ -40,7 +40,7 @@ polkadot \
 --chain <path to spec json> \
 --bootnodes /ip4/<Alice IP>/tcp/30333/p2p/<Alice Peer ID> \
 --port 30334 \
---ws-port 9955
+--ws-port 9945
 ```
 
 Bob's command is perfectly analogous to Alice's. It differs concretely from Alice's in that Bob has
@@ -49,7 +49,7 @@ Finally he has added a `--bootnodes` flag. This bootnodes flag is not strictly n
 running the entire network on a single local system, but it is necessary when operating over the
 network, so I've chosen to leave it in.
 
-## Starting Additional Nodes (Optional)
+## Starting Additional Validators (Optional)
 
 > If you are using the `rococo-custom-2-raw.json` spec, you do not need to start additional nodes.
 
@@ -64,7 +64,7 @@ polkadot \
 --base-path /tmp/relay-charlie \
 --chain <path to spec json> \
 --port 30335 \
---ws-port 9966
+--ws-port 9946
 ```
 
 If your custom chain spec includes self-generated keys, see the

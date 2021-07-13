@@ -11,7 +11,7 @@ that are not "systems parachains" that use a different method to obtain the Para
 
 The easiest way to reserve your Para ID is via the
 [Polkadot-JS Apps](https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/parachains/parathreads)
-under the *Network* -> **Parachains** subpage, click on **Parathreads** tab and use the
+under the _Network_ -> **Parachains** subpage, click on **Parathreads** tab and use the
 **+ ParaId** button.
 
 ![ParaID Reservation Screenshot](../../assets/img/paraid-reserve.png)
@@ -20,5 +20,5 @@ under the *Network* -> **Parachains** subpage, click on **Parathreads** tab and 
 > ID will be 2000 for your first parathread registration.
 
 Note that the account used to register the Para ID must also be the origin for using this
-Para ID. Once you submit this extrinsic successfully, you can now launch your parachain or
-parathread using this reserved ID.
+Para ID. Once you submit this extrinsic successfully (you must see a sucessful `registrar.Reserved`
+event with your `paraID`), you can now launch your parachain or parathread using this reserved ID.
