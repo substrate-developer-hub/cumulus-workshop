@@ -38,10 +38,10 @@ All parachains will need to register as a parathread first. You will need:
   and `1000-1999` are reserved for [public utility parachains](https://wiki.polkadot.network/docs/learn-common-goods#public-utility-chains).
 
 - Your parachain genesis state. Refer to the
-[genesis state export process](en/3-parachains/1-launch.md#generate-parachain-genesis-state).
+  [genesis state export process](en/3-parachains/1-launch.md#generate-parachain-genesis-state).
 
 - Your parachain Wasm runtime. Refer to the
-[Wasm runtime export process](en/3-parachains/1-launch.md#obtain-wasm-runtime-validation-function).
+  [Wasm runtime export process](en/3-parachains/1-launch.md#obtain-wasm-runtime-validation-function).
 
 The procedure will be as followed:
 
@@ -60,7 +60,7 @@ The procedure will be as followed:
   ![parathread-register-success.png](../../assets/img/parathread-register-success.png)
 
 - Also in the Polkadot-JS Apps [**Parachains > Parathreads** page](https://polkadot.js.org/apps/#/parachains/parathreads),
-you will see your parathread registration is **Onboarding**:
+  you will see your parathread registration is **Onboarding**:
 
   ![parathread-onboarding.png](../../assets/img/parathread-onboarding.png)
 
@@ -134,7 +134,6 @@ Notes on the parameters:
   has slots 3 - 6 open, these values can be any number in between.
 
 - You can cancel a crowdloan as long as you have not received a contribution.
-
 
 If your extrinsic succeeds, you can see your new crowdloan entry in
 [**Network** > **Parachains** > **Crowdloan** page](https://polkadot.js.org/apps/#/parachains/crowdloan):

@@ -28,13 +28,13 @@ edge development, and for now is not implemented in this workshop. A few things 
 in mind when interacting with various connected chains:
 
 - The relay chain has no parachain state, so you cannot query parachain data through the relay chain.
-Only Proof of Validity (PoV) information resides in relay chain storage: the Wasm runtime
-validation functions and the PoV headers.
+  Only Proof of Validity (PoV) information resides in relay chain storage: the Wasm runtime
+  validation functions and the PoV headers.
 
 - The relaychain is not the place to submit extrinsics or gather events data about parachains
-and vice versa. You should communicate with a collator node directly for parachain operations.
-Systems and possibly common-good parachains maybe accessible directly from relaychain for
-extrinsics and events. But in general, this is more of the exception rather than the rule.
+  and vice versa. You should communicate with a collator node directly for parachain operations.
+  Systems and possibly common-good parachains maybe accessible directly from relaychain for
+  extrinsics and events. But in general, this is more of the exception rather than the rule.
 
 - Vertical message passing (VMP) will eventually be allowed for.
 

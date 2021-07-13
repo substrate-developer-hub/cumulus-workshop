@@ -22,8 +22,9 @@ FROM debian:stretch-slim
 COPY --from=builder /builds/polkadot/target/release/polkadot .
 
 ## Copy chainspecs into the image
-COPY shared/chainspecs/rococo-local-2-raw.json .
-COPY shared/chainspecs/rococo-local-3-raw.json .
+COPY shared/chainspecs/rococo-custom-2-raw.json .
+COPY shared/chainspecs/rococo-custom-3-raw.json .
+COPY shared/chainspecs/rococo-custom-4-raw.json .
 
 # Open default ports. User is responsible for re-mapping these
 # or using host or overlay networking.

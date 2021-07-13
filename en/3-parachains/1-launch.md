@@ -30,7 +30,7 @@ parachain-collator export-genesis-wasm > para-2000-wasm
 > launching multiple parachains using the exact same runtime, you do not need to regenerate the Wasm
 > blob each time.
 
-> This is for the *genesis* block only. You cannot, at this time, connect a parachian with any
+> This is for the _genesis_ block only. You cannot, at this time, connect a parachian with any
 > previous state to a relay chain. All parachains must start from block 0 on the relay chain.
 
 ## Start the Collator Node
@@ -47,7 +47,7 @@ parachain-collator \
 --parachain-id 2000 \
 --base-path /tmp/parachain/alice \
 --port 40333 \
---ws-port 9945 \
+--ws-port 8844 \
 -- \
 --execution wasm \
 --chain <relay chain spec json> \

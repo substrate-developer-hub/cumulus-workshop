@@ -14,7 +14,7 @@ The transaction can be submitted **on a relay chain node** via Polkadot Apps UI.
 - Execute a sudo extrinsic on the relay chain by going to `Developer` -> `sudo` page.
 
 - Pick `paraSudoWrapper` -> `sudoScheduleParaInitialize(id, genesis)` as the extrinsic type,
-shown below.
+  shown below.
 
 ![Registration screenshot](../../assets/img/parachain-registration-sudo.png)
 
@@ -95,7 +95,7 @@ Finally, the collator should start producing log messages like the following:
 
 > **NOTE**: your sole collator is the _only home of the parachain data_ as there is only one node
 > on your entire network. Relay chains only store _header_ information. If the parachian data is lost
->  you will **not** be able to recover the chain!
+> you will **not** be able to recover the chain!
 
 If you _must_ purge your chain database, you need to deregister and re-register it. It may be easier
 in testing to instead just purge all the chains. To purge the collator, run:

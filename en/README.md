@@ -24,8 +24,8 @@ process! We suggest compiling and running Parachain template on a machine with *
 - 4 CPU cores (8 is suggested)
 - 50 GB of free HDD/SSD space
 
-Without the minimal RAM here, you are likely to *run out of memory resulting in a `SIGKILL`
-error*. This generally happens on the `polkadot-service` build - so be sure to _monitor your RAM
+Without the minimal RAM here, you are likely to _run out of memory resulting in a `SIGKILL`
+error_. This generally happens on the `polkadot-service` build - so be sure to _monitor your RAM
 usage_ (with something like [`htop`](https://htop.dev/)) and look out as swap memory starting to be
 used.
 
@@ -34,7 +34,7 @@ time for more limited memory usage.
 
 - Use less threads: cargo's `-j` flag specifies the number of threads to use to build. Try to use one less than the CPU cores your machine has.
 - Cargo's [codegen units](https://doc.rust-lang.org/cargo/reference/profiles.html#codegen-units)
-feature makes more optimized builds, with less ram, but _much_ longer compile times.
+  feature makes more optimized builds, with less ram, but _much_ longer compile times.
 
 ```bash
 # use less codegen units
@@ -52,9 +52,9 @@ sure that you are testing against the exact same build of that relay chain.
 
 This workshop has been tested on commits:
 
-- **Polkadot** tagged [**`v0.9.7`**](https://github.com/paritytech/polkadot/tree/v0.9.7)
-- **Parachain Template** tagged [**`polkadot-v0.9.7`**](https://github.com/substrate-developer-hub/substrate-parachain-template/tree/polkadot-v0.9.7)
-- **Polkadot-JS Apps** tagged [**`v0.93.1`**](https://github.com/polkadot-js/apps/tree/v0.93.1).
+- **Polkadot** tagged [**`v0.9.8`**](https://github.com/paritytech/polkadot/tree/v0.9.8)
+- **Parachain Template** tagged [**`polkadot-v0.9.8`**](https://github.com/substrate-developer-hub/substrate-parachain-template/tree/polkadot-v0.9.8)
+- **Polkadot-JS Apps** tagged [**`v0.94.1`**](https://github.com/polkadot-js/apps/tree/v0.94.1).
   It is generally expected that the [hosted Polkadot-JS Apps](https://polkadot.js.org/apps/#/explorer) should work. If you have issues, build and run this UI yourself, at this tagged version.
 
 > NOTE: you **must** use these version exactly to ensure that you do not run into conflicts as
