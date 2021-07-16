@@ -9,6 +9,7 @@
   - [Register Parachain](en/3-parachains/2-register)
   - [Parachain Interaction](en/3-parachains/3-interact)
   - [Add More Parachain Nodes](en/3-parachains/4-more-nodes)
+- [Launch with `polkadot-launch`](en/3a-polkadot-launch/1-index)
 - [Parachain Development](en/4-develop/1-template-overview)
   - [Template Pallet](en/4-develop/2-template-pallet)
   - [External Pallet](en/4-develop/3-external-pallet)
