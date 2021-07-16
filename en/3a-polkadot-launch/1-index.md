@@ -31,7 +31,6 @@ In this exercise, we will launch a **Polkadot relay chain of three nodes, and th
 
 2. `polkadot-launch` reads a config file to know all the config required to launch its relaychain and parachain and all the necessary startup config. We have that setup already and can be seen [here](/shared/polkadot-launch-config/relay-3-2para-1.json).
 
-
   Let take a brief look at the file. Inside the `relaychain` key, we see
     - `bin`: specifying where the binary is
     - `chain`: the type of the relay chain we are launching
@@ -215,7 +214,7 @@ This is similar to parachains but for "simple" collators like the adder-collator
 
 This specifies HRMP channels to be open between the specified parachains so that it's possible to send messages between those. Keep in mind that an HRMP channel is unidirectional and in case you need to communicate both ways you need to open channels in both directions.
 
-### Remaining Section
+### Remaining
 
 Finally, we have `types`, and `finalization`.
 
@@ -226,4 +225,4 @@ Finally, we have `types`, and `finalization`.
 
 In this chapter, you have learned about `polkadot-launch` node utility script, and are able to launch relay chain and parachains all in just a single command line.
 
-This is a good basis to get to our next subject, actual development in parachains.
+This is a good basis to get to our next subject, actual parachain development.
