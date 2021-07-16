@@ -52,13 +52,15 @@ In this exercise, we will launch a **Polkadot relay chain of three nodes, and th
   polkadot-launch relay-3-2para-1.json
   ```
 
-  If everything go well, you should see messages similar to the following
+  If everything go well, you be will seeing something like the following
 
-  ```bash
-  <tk>
-  ```
+  ![polkadot-launch-log](../../assets/img/polkadot-launch-log.png)
 
-4. Now if you open up another console and inspect the current directory, you will see the relay chain node log are written to `alice.log`, `bob.log`, and `charlie.log`. While the parachain log is indicated with the websocket port numbers they are listening to, so you should see `9988.log`and `9999.log` there.
+4. Now open up another console and inspect the current directory, you will see the relay chain node logs are written to `alice.log`, `bob.log`, and `charlie.log`, while the parachain log is indicated with the websocket port numbers they are listening to, so you should see `9988.log`and `9999.log` there.
+
+  Another way to verify the setup is correct, is by going to [Polkadot-JS Apps **Network** - **Parachains** tab](https://polkadot.js.org/apps/#/parachains), after configure to connect to your relay chain node, you should see the UI is showing two parachains being connected to the relay chain.
+
+  ![polkadot-apps-with-2-parachains](../../assets/img/polkadot-apps-with-2-parachains.png)
 
 Congratulation! You have automated the launch of a 3-node relay chain, and two parachains with a single node using `polkadot-launch` CLI utility.
 
@@ -220,6 +222,10 @@ Finally, we have `types`, and `finalization`.
 
 - `types`: The custom Polkadot-JS custom types to be fed to Polkadot-JS API.
 - `finalization`: either `true` or `false`, whether you want transaction submitted from `polkadot-launch` wait for block finalization.
+
+## How It Works
+
+This tool just automates the steps you learned previously to spin up multiple relay chain nodes and parachain nodes in order to create a local test network. It also leverage on Polkadot-JS API to connect to these spawned nodes over their WebSocket endpoints.
 
 ## Conclusion
 
