@@ -2,69 +2,123 @@
 
 ## Overview
 
-Now that we have gone through the procedure of manually launching a relay chain of a few nodes, and a parachain. You might wonder this is all quite a hassle if you have to go through this exercise each time when developing and testing for parachain development.
+Now that we have gone through the procedure of manually launching a relay chain of a few nodes, and
+a parachain, you can automate testnets for development and testing.
+[`polkadot-launch`](https://github.com/paritytech/polkadot-launch) is a Node utility script that
+does this for you, allowing for some custom configurations to setup networks very simply.
 
-Fortunately, there is actually a Node utility script, [`polkadot-launch`](https://github.com/paritytech/polkadot-launch) that automate all the previous process. But it will still be good to know what's involved under the hood, and when things go wrong, you know how it should be done and troubleshoot issues.
+Note that this isn't a replacement for the manual proccess, as this script is not a perfect fit for
+all use cases and may fail for yours, so when things go wrong, you know the [manual
+steps](en/1-prep/1-compiling) that this script is executing for you to troubleshoot.
 
 Now, let's install the utility script and try it out.
 
 ## Installation
 
-Run the following command to install the script globally in your environment
+### Global Install (Option A)
+
+For most cases, you do not need to edit `polkadot-launch`. Run the following command to install the
+script globally in your environment:
 
 ```bash
 yarn global add polkadot-launch
+# Check install:
+polkadot-launch --version
+# 1.7.0
 ```
 
-To verify it is installed properly, run the command below and should return you its current version.
+### Clone & Local Build (Option B)
+
+If you find you need to edit the script, or otherwise would like to build this yourself, do:
 
 ```bash
-polkadot-launch --version
-# 1.6.2
+git clone git@github.com:paritytech/polkadot-launch.git
+cd polkadot-launch
+# You need node v14+ -- https://www.geeksforgeeks.org/how-to-update-node-js-and-npm-to-next-version/
+yarn install
+# The entry point is `cl.js`
+node dist/cli.js --version
+# 1.7.0
 ```
 
-## Kickstart
+If you think your edits are valuable, please consider [opening a PR](https://github.com/paritytech/polkadot-launch).
+
+## Basic Configuration
 
 In this exercise, we will launch a **Polkadot relay chain of three nodes and two parachains, each with one node only**.
 
-1. First get our Polkadot and Parachain Template binary compiled. [This section](/en/1-prep/1-compiling?id=building-the-polkadot-relay-chain-node) contains the instructions on getting Polkadot compiled, and [this section](/en/1-prep/1-compiling?id=building-the-parachain-template) for Parachain Template.
+### Prerequisites
 
-2. `polkadot-launch` reads a JSON config file to know all the config parameters required to launch its relaychain and parachain nodes. We have an example setup, and please [download it here](/shared/polkadot-launch-config/relay-3-2para-1.json). Let's take a look at what the file contains.
+1. We first get our Polkadot and Parachain Template cloned, and compiled.
 
-  Inside the `relaychain` key, we see:
+   1. Build Polkadot, instructions [here](/en/1-prep/1-compiling?id=building-the-polkadot-relay-chain-node)
+   2. Build a Parachain, instructions [here](/en/1-prep/1-compiling?id=building-the-parachain-template)
 
-    - `bin`: specify where the relay chain binary is
-    - `chain`: the type of the relay chain we are launching. It could either be a chain type, e.g. `rococo-local`, or a chainspec filepath.
-    - `nodes`: number of nodes we have. Here we have 3 nodes with three well-known addresses as the validator session keys, and their respective websocket port (`wsPort`) and TCP port (`port`) listened to.
+2. Write a config file for `polkadot-launch` to fit your needs.
+   - **Here is one to get us started:**
+     <a target="_blank"
+     href="shared/polkadot-launch-config/relay-3-validators--2paras-1collator.json">relay-3-validators--2paras-1collator.json</a>
 
-  Inside the `parachains` key, we see two parachains defined, with:
+<!-- for some reason this links can't be markdown. See https://github.com/substrate-developer-hub/cumulus-workshop/issues/16 -->
 
-    - `bin`: specify where the parachain collator binary is
-    - `id`: the Para ID of the chain
-    - `balance`: Initial balance to be set for well-known accounts
-    - `nodes`: the nodes setting for the corresponding parachain. Setting are similar to those in relay chain. We only have one node setup per parachain.
+Let take a brief look at the file. Inside the `relaychain` key, we see:
 
-  We will go through the rest of the options later.
+- `bin`: specifying where the relay chain binary is
+- `chain`: the type of the relay chain we are launching
+- `nodes`: number of nodes we have
 
-3. Let's update the `bin` location for the relaychain and parachains to an absolute path where your binaries are located. For the two parachains, use the same Parachain Template binary.
+As mentioned 3 nodes with the respective well known address as the session keys, its
+respective websocket port (`wsPort`) and TCP port (`port`) listening to.
 
-  Now you could run with:
+Inside `parachains` key, we see **two parachains** are defined, each with:
 
-  ```bash
-  polkadot-launch relay-3-2para-1.json
-  ```
+- `bin`: where the parachain binary is located
+- `id`: the Para ID of each chain
+- `balance`: Initial balance to be set for key-known account
+- `nodes`: the nodes setting for the corresponding parachains
 
-  If everything go well, you will be seeing something like the following:
+We see that each parachain has one node setup.
 
-  ![polkadot-launch-log](../../assets/img/polkadot-launch-log.png)
+3. Update the `bin` location for the relaychain and parachains to an absolute path where your
+   binaries are located. For the two parachains, use the same Parachain Template binary.
 
-4. Now open up another console and inspect the current directory, you will see the relay chain node logs are written to `alice.log`, `bob.log`, and `charlie.log`, while the parachain logs are indicated with the websocket port numbers they are listening to, so you should see `9988.log`and `9999.log` there.
+### Launch a Network
 
-  Another way to verify the setup is correct, is by going to [Polkadot-JS Apps **Network** - **Parachains** tab](https://polkadot.js.org/apps/#/parachains), after configure to connect to your relay chain node, you should see the UI showing two parachains being connected to the relay chain.
+Now you could can start your network with:
 
-  ![polkadot-apps-with-2-parachains](../../assets/img/polkadot-apps-with-2-parachains.png)
+```bash
+mkdir <some empty working directory for log files and new chainspecs>
+cd <your logfile & chainspec dir>
+polkadot-launch relay-3-2para-1.json
+```
 
-Congratulation! You have automated the launch of a 3-node relay chain, and two parachains with a single node using `polkadot-launch` CLI utility.
+If everything go well, you should see messages similar to the following:
+
+![polkadot-launch-log.png](../../assets/img/polkadot-launch-log.png)
+
+Now open your working directory to find the relay chain node log are written to `alice.log`,
+`bob.log`, and `charlie.log` for your three validators, respectively. While the parachain log is
+indicated with the websocket port numbers they are listening to, so you should see `9988.log`and
+`9999.log` there for each unique instance of your parachains. There are also the customized chain
+spec files used to launch each network, including the change of `paraID` used for each instance of
+the parachain used in your file.
+
+If you wish to monitor the logs in real time, you can do so with:
+
+```bash
+# While `polkadot-launch` is running...
+# Open a new terminal for each node and monitor logs with:
+tail -f <logfile>
+```
+
+Another way to verify the setup is correct, is by going to [Polkadot-JS Apps **Network** -
+**Parachains** tab](https://polkadot.js.org/apps/#/parachains), after configure to connect to a
+**relay chain node**, you should see the UI showing two parachains being connected to the relay chain.
+
+![polkadot-apps-with-2-parachains](../../assets/img/polkadot-apps-with-2-parachains.png)
+
+Congratulation! You have automated the launch of a 3-node relay chain, and two parachains with a
+single node using `polkadot-launch` CLI utility.
 
 Next, we will go through in details the configuration parameters that `polkadot-launch` recognizes in the config file.
 
@@ -77,19 +131,27 @@ The config file can broadly divided into five sections, shown below.
   "relaychain": {
     //...
   },
-  "parachains": [{
-    //...
-  }, {
-    //...
-  }],
-  "simpleParachains": [{
-    //...
-  }, {
-    //...
-  }],
-  "hrmpChannels": [{
-    //...
-  }],
+  "parachains": [
+    {
+      //...
+    },
+    {
+      //...
+    }
+  ],
+  "simpleParachains": [
+    {
+      //...
+    },
+    {
+      //...
+    }
+  ],
+  "hrmpChannels": [
+    {
+      //...
+    }
+  ],
   "types": {},
   "finalization": false
 }
