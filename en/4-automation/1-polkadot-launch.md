@@ -1,4 +1,4 @@
-# Launching Relay Chain & Parachains with `polkadot-launch`
+# Launch development environment with __polkadot-launch__
 
 ## Overview
 
@@ -84,7 +84,7 @@ We see that each parachain has one node setup.
 
 ### Launch a Network
 
-Now you could can start your network with:
+Now you can start your network with the next commands:
 
 ```bash
 mkdir <some empty working directory for log files and new chainspecs>
@@ -215,7 +215,7 @@ Finally, there is `genesis`. It is a JSON object of the properties you want to m
 ```json
 "parachains": [
   {
-    "bin": "./bin/polkadot-collator",
+    "bin": "./bin/parachain-collator",
     "id": "2000",
     "balance": "1000000000000000000000",
     "nodes": [
