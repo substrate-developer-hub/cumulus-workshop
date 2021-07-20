@@ -92,11 +92,9 @@ cd <your logfile & chainspec dir>
 polkadot-launch relay-3-2para-1.json
 ```
 
-If everything go well, you should see messages similar to the following
+If everything go well, you should see messages similar to the following:
 
-```bash
-<tk>
-```
+![polkadot-launch-log.png](../../assets/img/polkadot-launch-log.png)
 
 Now open your working directory to find the relay chain node log are written to `alice.log`,
 `bob.log`, and `charlie.log` for your three validators, respectively. While the parachain log is
@@ -112,6 +110,12 @@ If you wish to monitor the logs in real time, you can do so with:
 # Open a new terminal for each node and monitor logs with:
 tail -f <logfile>
 ```
+
+Another way to verify the setup is correct, is by going to [Polkadot-JS Apps **Network** -
+**Parachains** tab](https://polkadot.js.org/apps/#/parachains), after configure to connect to a
+**relay chain node**, you should see the UI showing two parachains being connected to the relay chain.
+
+![polkadot-apps-with-2-parachains](../../assets/img/polkadot-apps-with-2-parachains.png)
 
 Congratulation! You have automated the launch of a 3-node relay chain, and two parachains with a
 single node using `polkadot-launch` CLI utility.
