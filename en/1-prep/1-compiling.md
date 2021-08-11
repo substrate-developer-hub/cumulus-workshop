@@ -12,7 +12,7 @@ Docker images.
 Follow the instructions here to [setup a local development environment](https://substrate.dev/docs/en/knowledgebase/getting-started/)
 for Substrate.
 
-If you are already setup with a local development environment, remember to ensure that you are building with the latest stable toolchain.  The link above also includes information on updating. 
+> NOTE: If you are already setup with a local development environment, remember to ensure that you are building with the latest stable toolchain: use `rustup update` before moving forward!
 
 ## Building the Polkadot Relay Chain Node
 
