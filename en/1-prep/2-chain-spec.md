@@ -62,13 +62,13 @@ specs.
 
 ```bash
 # Create a base chain spec that we will modify
-polkadot build-spec --chain rococo-local --disable-default-bootnode > rococo-custom-plain.json
+polkadot build-spec --chain rococo-local --disable-default-bootnode > rococo-custom-2-plain.json
 ```
 
 That file contains most of the information we need already. Rococo is a permissioned chain, so
 we just need to add an authority and its session keys. The snippet below shows the relevant part of
 the generated spec file. All keys in the generated file belong to the usual well known accounts used
-in other tutorials (Alice and Bob in the case of the `rococo-custom-plain.json` file).
+in other tutorials (Alice and Bob in the case of the `rococo-custom-2-plain.json` file).
 
 ```json
 "session": {
@@ -194,12 +194,12 @@ Now that you've modified your chain spec, you can generate the final raw spec fi
 > to include.
 
 ```bash
-polkadot build-spec --chain rococo-custom-plain.json --raw --disable-default-bootnode > rococo-custom.json
+polkadot build-spec --chain rococo-custom-X-plain.json --raw --disable-default-bootnode > rococo-custom-X-raw.json
 ```
 
-You may get the output warning: `Took active validators from set with wrong size`.
-The resulting `chain-spec.json` will still be **perfectly usable**, you can ignore this warning for
-now.
+> You may get the output warning: `Took active validators from set with wrong size`.
+> The resulting `chain-spec.json` will still be **perfectly usable**, you can ignore this warning for
+> now.
 
 ## Further Resources
 
@@ -217,7 +217,7 @@ To learn more beyond what we did and more on what can be configured, check out t
 
 <!--
 
-self-note: This part seems appear a bit out of context, and suddently jump to the code implementation
+self-note: This part seems appear a bit out of context, and suddenly jump to the code implementation
 level.
 
 ### Session Keys
