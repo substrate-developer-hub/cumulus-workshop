@@ -10,7 +10,7 @@ parachain collator. Open another instance of Apps in a new browser window, and c
 appropriate endpoint. If you have followed these instructions so far, you can connect to the
 parachain node at:
 
-https://polkadot.js.org/apps/?rpc=ws%3A%2F%2Flocalhost%3A9945#/
+https://polkadot.js.org/apps/?rpc=ws%3A%2F%2Flocalhost%3A8844#/
 
 ## Submit Transactions
 
