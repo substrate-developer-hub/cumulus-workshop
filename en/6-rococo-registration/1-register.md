@@ -10,9 +10,9 @@ Rococo is Parity's official test network for cumulus-based parachains.
 >
 > Please test registering your parachain locally before attempting to connect to Rococo!
 
-[**Polkadot `release-v0.9.7` branch**](https://github.com/paritytech/polkadot/tree/release-v0.9.7)
+[**Polkadot `release-v0.9.9` branch**](https://github.com/paritytech/polkadot/tree/release-v0.9.9)
 
-[**Cumulus `polkadot-v0.9.7` branch**](https://github.com/paritytech/cumulus/tree/polkadot-v0.9.7)
+[**Cumulus `polkadot-v0.9.9` branch**](https://github.com/paritytech/cumulus/tree/polkadot-v0.9.9)
 
 ### 1. Request ROC Tokens
 
