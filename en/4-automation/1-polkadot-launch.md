@@ -1,4 +1,4 @@
-# Launch development environment with __polkadot-launch__
+# Launch development environment with `polkadot-launch`
 
 ## Overview
 
@@ -55,7 +55,7 @@ In this exercise, we will launch a **Polkadot relay chain of three nodes and two
    2. Build a Parachain, instructions [here](/en/1-prep/1-compiling?id=building-the-parachain-template)
 
 2. Write a config file for `polkadot-launch` to fit your needs.
-   - **Here is one to get us started:**
+   - **Here is a template we will modify to get started:**
      <a target="_blank"
      href="shared/polkadot-launch-config/relay-3-validators--2paras-1collator.json">relay-3-validators--2paras-1collator.json</a>
 
@@ -79,17 +79,22 @@ Inside `parachains` key, we see **two parachains** are defined, each with:
 
 We see that each parachain has one node setup.
 
-3. Update the `bin` location for the relaychain and parachains to an absolute path where your
-   binaries are located. For the two parachains, use the same Parachain Template binary.
+3. **Update the `bin` location for the relaychain and parachains to an absolute path where your**
+   **binaries are located. For the two parachains, use the same Parachain Template binary.**
 
 ### Launch a Network
 
-Now you can start your network with the next commands:
+Now you can start your network with the commands:
 
 ```bash
 mkdir <some empty working directory for log files and new chainspecs>
 cd <your logfile & chainspec dir>
-polkadot-launch relay-3-2para-1.json
+# Move the example relay-3-validators--2paras-1collator.json file in this dir
+#
+# If installed globally:
+polkadot-launch relay-3-validators--2paras-1collator.json
+# If installed locally
+node ./<path to polkadot-launch>/dist/cli.js relay-3-validators--2paras-1collator.json
 ```
 
 If everything go well, you should see messages similar to the following:
