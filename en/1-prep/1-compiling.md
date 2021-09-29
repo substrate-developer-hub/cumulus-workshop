@@ -28,7 +28,7 @@ git clone https://github.com/paritytech/polkadot.git
 cd polkadot
 
 # Checkout the proper commit
-git checkout release-v0.9.9
+git checkout release-v0.9.10
 
 # Build the relay chain Node
 cargo build --release
@@ -57,7 +57,7 @@ git clone https://github.com/substrate-developer-hub/substrate-parachain-templat
 cd substrate-parachain-template
 
 # Checkout the proper commit
-git checkout polkadot-v0.9.9
+git checkout polkadot-v0.9.10
 
 # Build the parachain template collator
 cargo build --release
