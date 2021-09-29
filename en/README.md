@@ -54,7 +54,7 @@ This workshop has been tested on commits:
 
 - **Polkadot** tagged [**`release-v0.9.10`**](https://github.com/paritytech/polkadot/tree/v0.9.9)
 - **Parachain Template** tagged [**`polkadot-v0.9.10`**](https://github.com/substrate-developer-hub/substrate-parachain-template/tree/polkadot-v0.9.10)
-- **Polkadot-JS Apps** tagged [**`v0.96.2-0`**](https://github.com/polkadot-js/apps/commit/e1755a9d4612343039a2c6ba8a2870c152764f22).
+- **Polkadot-JS Apps** tagged [**`v0.96.2-34`**](https://github.com/polkadot-js/apps/commit/1073f1b79bf0aec1c853441e3bbac614defce76e).
   It is generally expected that the [hosted Polkadot-JS Apps](https://polkadot.js.org/apps/#/explorer) should work. If you have issues, build and run this UI yourself, at this tagged version.
 
 > NOTE: you **must** use these version exactly to ensure that you do not run into conflicts as
