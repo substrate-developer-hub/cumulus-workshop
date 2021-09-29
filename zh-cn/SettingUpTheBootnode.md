@@ -11,9 +11,10 @@ https://www.digitalocean.com/community/questions/configure-nginx-for-nodejs-back
 https://serverfault.com/questions/424452/nginx-enable-site-command
 
 # 步骤
+
 ## 基础系统
 
-在 digital ocean (或类似) 建立一个始于Ubuntu 18.04. SSH基础的新机器。
+在 digital ocean (或类似) 建立一个始于 Ubuntu 18.04. SSH 基础的新机器。
 
 ## 创建网路服务器
 
@@ -42,7 +43,9 @@ https://serverfault.com/questions/424452/nginx-enable-site-command
 
     <p>
       你可以从github编译节点
-      <a href="https://github.com/substrate-develeoper-hub/substrate-node-template">Substrate Node Template</a>.<br />
+      <a href="https://github.com/substrate-develeoper-hub/substrate-node-template"
+        >Substrate Node Template</a
+      >.<br />
       Download the <a href="spec.json">Chain Specification</a>.<br />
       Download the <a href="alice.json">Prefunded Alice Key</a>.<br />
     </p>
@@ -50,11 +53,9 @@ https://serverfault.com/questions/424452/nginx-enable-site-command
 </html>
 ```
 
-
 我们稍后会创建这些链接文件。确认新网页加载。
 
 ## 添加 SSL
-
 
 我们需要一个域名。注册它并设置 dns 使其指向您的服务器。这个过程因注册商而异。什么时候
 您的域加载了我们刚刚创建的网页，您可以继续设置 SSL。
@@ -115,7 +116,6 @@ cargo build --release # If cargo was _just_ installed, start a new shell so it's
 
 ## 节点的服务器块
 
-
 构建节点后，添加服务器块以重定向标准端口 9944 和 9933。这些设置假定节点
 将分别在端口 9994 和 9993 上公开 ws 和 rpc。这可以通过`--ws-port 9994 --rpc-port 9993`来完成。
 我们很快就会自动执行这些设置。
@@ -134,7 +134,7 @@ server {
   location / {
     proxy_buffers 16 4k;
     proxy_buffer_size 2k;
-    proxy_pass http://localhost:9994;
+    proxy_pass http://127.0.0.1:9994;
     proxy_http_version 1.1;
   }
 }
@@ -151,7 +151,7 @@ server {
   location / {
     proxy_buffers 16 4k;
     proxy_buffer_size 2k;
-    proxy_pass http://localhost:9993;
+    proxy_pass http://127.0.0.1:9993;
   }
 }
 
@@ -169,15 +169,14 @@ systemctl 重新加载 nginx
 
 ## 创建共享链规范
 
-
-基于本地测试网`node-template build-spec --chain local > spec.json`创建一个基本的chainspec
+基于本地测试网`node-template build-spec --chain local > spec.json`创建一个基本的 chainspec
 
 编辑网络的名称和 ID、根密钥、预付账户等。
 
 在我们将引导节点添加到链规范之前，我们需要知道它们的节点身份。这意味着我们需要开始每个
 node 一次让它生成节点密钥。
 
-像`node-template --chain=spec.json --alice`一样启动Alice的节点，一旦节点启动，观察它的节点身份，然后
+像`node-template --chain=spec.json --alice`一样启动 Alice 的节点，一旦节点启动，观察它的节点身份，然后
 用 ^C 杀死它。在 chainspec 的 bootnodes 部分对您想要的任何其他节点重复此操作。
 
 现在再次编辑链规范，以格式添加每个引导节点
@@ -197,11 +196,9 @@ node 一次让它生成节点密钥。
 
 `cp spec.json /var/www/html/spec.json`
 
-
 确认您可以通过网络访问 https://sfbw.bootnodes.net/spec.json`
 
 ## 启动脚本（可选）
-
 
 如果您的节点需要许多标志，那么制作一个启动脚本可能是明智的，这样您就不会将其弄乱。我通常
 写一个这样的。
@@ -221,13 +218,12 @@ node 一次让它生成节点密钥。
 
 ## 共享预付账户
 
-
 请记住，我们的网站为用户提供下载预先资助的密钥。将 Alice 密钥添加到应用程序并将其导出到
 json。
 [Dev phrase](https://github.com/paritytech/substrate/blob/93123cc63eac37fed7a6cc6cc58e7e43d666ee03/core/primitives/src/crypto.rs#L40)
 
 底部驱动器服从湖帘烟篮举行比赛孤独适合步行//爱丽丝我使用密码：爱丽丝或只是一个上传
-服务器的json密钥
+服务器的 json 密钥
 
 ## Host a frontend
 
@@ -248,6 +244,5 @@ wss://sfbw.bootnodes.net:9944
 
 使用“yarn build”构建生产版本，然后将构建输出目录移动到 Web 根目录中
 `mv build /var/www/html/front-end`
-
 
 您必须确保配置文件中的项目名称与您从中提供服务的位置相匹配。
