@@ -4,15 +4,21 @@
 
 Rococo is Parity's official test network for cumulus-based parachains.
 
-> **IMPORTANT NOTE:** As parachain is being developed in a fast pace, you need to use the
-> corresponding tagged version of Cumulus and Polkadot for the relay-chain and parachain
-> compatible to each others.
->
-> Please test registering your parachain locally before attempting to connect to Rococo!
+## _NEW ROCOCO SLOTS PRESENTLY DISABLED FOR COMMUNITY CHAINS_
 
-[**Polkadot `release-v0.9.10` branch**](https://github.com/paritytech/polkadot/tree/release-v0.9.10)
+The core team is very actively working on _breaking changes_ in [disputes
+logic](https://github.com/paritytech/polkadot/blob/master/runtime/parachains/src/disputes.rs)
+(following the [implementers
+guide](https://github.com/paritytech/polkadot/blob/master/roadmap/implementers-guide/src/runtime/disputes.md))
+and testing these on Rococo.
+This is causing instability in running parachains on Rococo, and thus **temporarily** _new
+slots are not typically available_.
 
-[**Cumulus `polkadot-v0.9.10` branch**](https://github.com/paritytech/cumulus/tree/polkadot-v0.9.10)
+Come ask the team in [Parachain Technical matrix
+channel](https://matrix.to/#/#parachain-technical:matrix.parity.io) about the status and your needs
+to connect to a larger testnet and we can discuss options.
+
+> Please **always** test registering your parachain locally before attempting to connect to Rococo!
 
 ### 1. Request ROC Tokens
 
