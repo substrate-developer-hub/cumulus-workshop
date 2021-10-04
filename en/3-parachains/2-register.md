@@ -144,11 +144,11 @@ in testing to instead just purge all the chains. To purge the collator, run:
 
 ```bash
 # Purge the collator(s)
-parachain-collator purge-chain\
+./target/release/parachain-collator purge-chain\
   --base-path <your collator DB path set above>
 
 # Purge the validator(s)
-polkadot purge-chain\
+./target/release/polkadot purge-chain\
   --base-path <your relay chain DB path set above>
 ```
 
