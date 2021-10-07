@@ -9,7 +9,7 @@ nodes.
 
 ```bash
 # Start Relay `Alice` node
-polkadot \
+./target/release/polkadot \
 --alice \
 --validator \
 --base-path /tmp/relay/alice \
@@ -33,7 +33,7 @@ this:
 ## Start Bob's Node
 
 ```bash
-polkadot \
+./target/release/polkadot \
 --bob \
 --validator \
 --base-path /tmp/relay-bob \
@@ -58,7 +58,7 @@ need to start one or two more nodes. Again, this command is entirely analogous. 
 make sure that nodes on the same physical system do not have conflicting ports or base paths.
 
 ```bash
-polkadot \
+./target/release/polkadot \
 --charlie \
 --validator \
 --base-path /tmp/relay-charlie \

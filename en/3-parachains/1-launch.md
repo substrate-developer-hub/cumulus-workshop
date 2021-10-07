@@ -14,7 +14,7 @@ node can export that state to a file for us. The following command will create a
 parachain's entire genesis state, hex-encoded.
 
 ```bash
-parachain-collator export-genesis-state --parachain-id 2000 > para-2000-genesis
+./target/release/parachain-collator export-genesis-state --parachain-id 2000 > para-2000-genesis
 ```
 
 ## Obtain Wasm Runtime Validation Function
@@ -23,7 +23,7 @@ The relay chain also needs the parachain-specific runtime validation logic to va
 parachain blocks. The collator node also has a command to produce this Wasm blob:
 
 ```bash
-parachain-collator export-genesis-wasm > para-2000-wasm
+./target/release/parachain-collator export-genesis-wasm > para-2000-wasm
 ```
 
 > The Wasm blob does not depend on the Para ID, so we do not provide that flag. If you are
@@ -40,7 +40,7 @@ relay chain spec we used when launching relay chain nodes, at the second half of
 
 ```bash
 # NOTE: this command assumes a Para ID of 2000. Change as needed.
-parachain-collator \
+./target/release/parachain-collator \
 --alice \
 --collator \
 --force-authoring \
